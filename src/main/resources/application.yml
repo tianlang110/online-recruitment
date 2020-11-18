@@ -3,3 +3,13 @@ spring:
     prefix:
       classpath: /templates
     cache: false
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.longlong.entity
+
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper : debug

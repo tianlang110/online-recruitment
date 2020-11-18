@@ -1,13 +1,14 @@
  
  
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
   <meta charset="utf-8">
-  <title>基于 layui 的极简社区页面模版</title>
+  <title>比奇堡招聘网，在线求职招聘平台</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="fly,layui,前端社区">
-  <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
+  <meta name="keywords" content="比奇堡招聘网">
+  <meta name="description" content="我们要成为全球最大的招聘网站">
   <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
   <link rel="stylesheet" th:href="@{/css/global.css}">
 </head>
@@ -18,30 +19,38 @@
     <a class="fly-logo" href="/">
       <img th:src="@{/images/logo.png}" alt="layui">
     </a>
-    <ul class="layui-nav fly-nav layui-hide-xs">
-      <li class="layui-nav-item layui-this">
-        <a href="/"><i class="iconfont icon-jiaoliu"></i>交流</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="case/case.html"><i class="iconfont icon-iconmingxinganli"></i>案例</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>框架</a>
-      </li>
-    </ul>
+<!--    <ul class="layui-nav fly-nav layui-hide-xs">-->
+<!--      <li class="layui-nav-item layui-this">-->
+<!--        <a href="/"><i class="iconfont icon-jiaoliu"></i>交流</a>-->
+<!--      </li>-->
+<!--      <li class="layui-nav-item">-->
+<!--        <a href="case/case.html"><i class="iconfont icon-iconmingxinganli"></i>案例</a>-->
+<!--      </li>-->
+<!--      <li class="layui-nav-item">-->
+<!--        <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>框架</a>-->
+<!--      </li>-->
+<!--    </ul>-->
     
     <ul class="layui-nav fly-nav-user">
       
       <!-- 未登入的状态 -->
-      <li class="layui-nav-item">
-        <a class="iconfont icon-touxiang layui-hide-xs" href="user/login.html"></a>
-      </li>
-      <li class="layui-nav-item">
-        <a th:href="@{/login}">登入</a>
-      </li>
-      <li class="layui-nav-item">
-        <a th:href="@{/reg}">注册</a>
-      </li>
+      <div sec:authorize="!isAuthenticated()">
+        <li class="layui-nav-item">
+          <a th:href="@{/login}">登入</a>
+        </li>
+        <li class="layui-nav-item">
+          <a th:href="@{/reg}">注册</a>
+        </li>
+      </div>
+      <div sec:authorize="isAuthenticated()">
+        <li class="layui-nav-item">
+          欢迎，
+        </li>
+        <li class="layui-nav-item">
+          <span sec:authentication="name"></span>
+        </li>
+      </div>
+
 <!--      <li class="layui-nav-item layui-hide-xs">-->
 <!--        <a href="/app/qq/" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入" class="iconfont icon-qq"></a>-->
 <!--      </li>-->
