@@ -40,12 +40,13 @@
           <a th:href="@{/reg}">注册</a>
         </li>
       </div>
+      <!-- 已登入的状态 -->
       <div sec:authorize="isAuthenticated()">
         <li class="layui-nav-item">
-          <a>qqqqq</a>
+          欢迎，
         </li>
         <li class="layui-nav-item">
-          <a>bbbbb</a>
+          <a method="post" th:href="@{/logout}">登出</a>
         </li>
       </div>
 <!--      <li class="layui-nav-item layui-hide-xs">-->

@@ -13,4 +13,8 @@
         select * from user where username = #{username}
     </select>
 
+    <insert id="addUser" parameterType="RegUser">
+        insert into user(username, password, usertype) values (#{username},#{password},#{usertype})
+    </insert>
+
 </mapper>
