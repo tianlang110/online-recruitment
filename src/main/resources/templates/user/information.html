@@ -24,43 +24,101 @@
       <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
           <div class="layui-form layui-form-pane">
-            <form method="post" th:action="@{/doreg}" sec:authorize="hasRole('admin')">
-              1111
-            </form>
-            <form method="post" th:action="@{/doreg}" sec:authorize="hasRole('seeker')">
-              <div class="layui-form-item">
-                <label for="L_username" class="layui-form-label">用户名</label>
-                <div class="layui-input-inline">
-                  <input type="text" id="L_username" name="username" required lay-verify="username|checkusername" autocomplete="off" class="layui-input">
+            <div th:if="${type=='admin'}">
+              <form method="post" th:action="@{/doreg}" >
+                <div class="layui-form-item">
+                  <label class="layui-form-label">姓名</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="name" required autocomplete="off" class="layui-input">
+                  </div>
                 </div>
-                <div class="layui-form-mid" style="color: red" th:if="${param.error}">用户名重复</div>
-              </div>
-              <div class="layui-form-item">
-                <label for="L_pass" class="layui-form-label">密码</label>
-                <div class="layui-input-inline">
-                  <input type="password" id="L_pass" name="password" required lay-verify="required" autocomplete="off" class="layui-input">
+                <div class="layui-form-item">
+                  <button class="layui-btn" lay-filter="formDemo" lay-submit>提交</button>
                 </div>
-              </div>
-              <div class="layui-form-item">
-                <label for="L_repass" class="layui-form-label">确认密码</label>
-                <div class="layui-input-inline">
-                  <input type="password" id="L_repass" name="repassword" required lay-verify="required|confirmPass" autocomplete="off" class="layui-input">
+              </form>
+            </div>
+            <div th:if="${type=='seeker'}">
+              <form method="post" th:action="@{/updateseeker}">
+                <div class="layui-form-item">
+                  <label class="layui-form-label">姓名</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="name" autocomplete="off" class="layui-input" th:value="${seeker.name}">
+                  </div>
                 </div>
-              </div>
-              <div class="layui-form-item">
-                <label class="layui-form-label">类型</label>
-                <div class="layui-input-block" >
-                  <input type="radio" name="usertype" value="1" title="个人" checked>
-                  <input type="radio" name="usertype" value="2" title="公司">
+                <div class="layui-form-item">
+                  <label class="layui-form-label">性别</label>
+                  <div class="layui-input-block" >
+                    <input type="radio" name="sex" value="男" title="男" checked>
+                    <input type="radio" name="sex" value="女" title="女">
+                  </div>
                 </div>
-              </div>
-              <div class="layui-form-item">
-                <button class="layui-btn" lay-filter="formDemo" lay-submit>立即注册</button>
-              </div>
-            </form>
-            <form method="post" th:action="@{/doreg}" sec:authorize="hasRole('company')">
-              33333
-            </form>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">年龄</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="age" autocomplete="off" class="layui-input" th:value="${seeker.age}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">电话</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="phone" autocomplete="off" class="layui-input" th:value="${seeker.phone}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">邮箱</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="email" autocomplete="off" class="layui-input" th:value="${seeker.email}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">学历</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="education" autocomplete="off" class="layui-input" th:value="${seeker.education}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">期望职位</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="post" autocomplete="off" class="layui-input" th:value="${seeker.post}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">期望薪资</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="salary" autocomplete="off" class="layui-input" th:value="${seeker.salary}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <button class="layui-btn" lay-filter="formDemo" lay-submit>提交</button>
+                </div>
+              </form>
+            </div>
+            <div th:if="${type=='company'}">
+              <form method="post" th:action="@{/updatecompany}">
+                <div class="layui-form-item">
+                  <label class="layui-form-label">公司名</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="name" autocomplete="off" class="layui-input" th:value="${company.name}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">地址</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="address" autocomplete="off" class="layui-input" th:value="${company.address}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">简介</label>
+                  <div class="layui-input-inline">
+                    <input type="text" height="6" name="introduction" autocomplete="off" class="layui-input" th:value="${company.introduction}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <button class="layui-btn" lay-filter="formDemo" lay-submit>提交</button>
+                </div>
+              </form>
+            </div>
+
           </div>
         </div>
       </div>

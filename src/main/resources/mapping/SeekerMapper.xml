@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longlong.mapper.SeekerMapper">
+
+    <resultMap id="BaseResultMap" type="com.longlong.entity.Seeker">
+        <result column="userid" jdbcType="INTEGER" property="userid" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="sex" jdbcType="VARCHAR" property="sex" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="education" jdbcType="VARCHAR" property="education" />
+        <result column="post" jdbcType="VARCHAR" property="post" />
+        <result column="salary" jdbcType="VARCHAR" property="salary" />
+    </resultMap>
+
+    <select id="querySeekerByUserid" resultType="com.longlong.entity.Seeker">
+        select * from seeker where userid = #{userid}
+    </select>
+
+    <insert id="addSeeker" parameterType="Seeker">
+        insert into seeker(userid, name, sex, age, phone, email, education, post, salary) values (#{userid},#{name},#{sex},#{age},#{phone},#{email},#{education},#{post},#{salary})
+    </insert>
+
+    <update id="updateSeeker" parameterType="Seeker">
+        update seeker set name=#{name},sex=#{sex},age=#{age},phone=#{phone},email=#{email},education=#{education},post=#{post},salary=#{salary} where userid=#{userid}
+    </update>
+</mapper>

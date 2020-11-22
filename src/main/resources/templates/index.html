@@ -1,5 +1,3 @@
- 
- 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
@@ -61,11 +59,11 @@
 <div class="fly-panel fly-column" th:fragment="seeker-topbar">
   <div class="layui-container">
     <ul class="layui-clear">
-      <li class="layui-hide-xs layui-this"><a th:href="@{/reg}">首页</a></li>
-      <li><a th:href="@{/reg}">搜索公司</a></li>
-      <li><a th:href="@{/reg}">搜索职位</a></li>
-      <li><a th:href="@{/reg}">我的简历</a></li>
-      <li><a th:href="@{/reg}">投递信息</a></li>
+      <li class="layui-hide-xs layui-this"><a th:href="@{/}">首页</a></li>
+      <li><a th:href="@{/seekercompany}">搜索公司</a></li>
+      <li><a th:href="@{/}">搜索职位</a></li>
+      <li><a th:href="@{/}">我的简历</a></li>
+      <li><a th:href="@{/}">投递信息</a></li>
     </ul> 
     
 <!--    <div class="fly-column-right layui-hide-xs"> -->
@@ -93,18 +91,18 @@
           <li>
             <div class="layui-row">
               <div class="layui-col-md4">
-                <a th:href="@{/}" style="color: #01AAED;font-weight:bold;font-size: 20px;">部门经理</a>
+                <a th:href="@{/}" style="color: #01AAED;font-weight:bold;font-size: 20px;"><i class="layui-icon layui-icon-star-fill"></i>部门经理</a>
               </div>
               <div class="layui-col-md1 layui-col-md-offset7">
-                <a th:href="@{/}" style="color: #FF5722;font-weight:bold;font-size: 20px;">面议</a>
+                <a th:href="@{/}" style="color: #FF5722;font-weight:bold;font-size: 20px;"><i class="layui-icon layui-icon-rmb"></i>面议</a>
               </div>
             </div>
             <div class="layui-row">
               <div class="layui-col-md4">
-                <a th:href="@{/}" style="color: #01AAED;font-weight:bold;font-size: 15px;">腾讯</a>
+                <a th:href="@{/}" style="color: #01AAED;font-weight:bold;font-size: 15px;"><i class="layui-icon layui-icon-home"></i>腾讯</a>
               </div>
               <div class="layui-col-md1 layui-col-md-offset7">
-                <a th:href="@{/}" style="color: #3F3F3F;font-size: 15px;">天津</a>
+                <a th:href="@{/}" style="color: #3F3F3F;font-size: 15px;"><i class="layui-icon layui-icon-location"></i>天津</a>
               </div>
             </div>
           </li>
@@ -258,7 +256,7 @@
   <p><a target="_blank">比奇堡小组</a> 2020 &copy; <a target="_blank">biqibao.com 出品</a></p>
 </div>
  
-<script th:src="/layui/layui.js"></script>
+<script th:src="@{/layui/layui.js}"></script>
 <script>
 
 </script>
