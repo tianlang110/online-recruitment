@@ -20,5 +20,9 @@ public class IndexController {
     {
         return "user/reg";
     }
-
+    @RequestMapping("/information")
+    public String information()
+    {
+        return "user/information";
+    }
 }

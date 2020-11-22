@@ -10,9 +10,9 @@ public class RegService {
     @Autowired
     UserMapper userMapper;
 
-    public void addUser(RegUser user) {
-        System.out.println(user.getUsername());
-        userMapper.addUser(user);
+    public int addUser(RegUser user) {
+        //System.out.println(user.getUsername());
+        return userMapper.addUser(user);
     }
 
 }

@@ -39,6 +39,9 @@ public class DoRegController {
                         @RequestParam("usertype") int usertype,
                         Model model)
     {
+        User oldUser = userService.queryUserByUsername(username);
+        if(oldUser!=null)
+            return "redirect:/reg?error=true";
         RegUser user = new RegUser();
         user.setUsername(username);
         user.setPassword(new BCryptPasswordEncoder().encode(password));
