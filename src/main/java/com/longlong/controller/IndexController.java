@@ -75,7 +75,7 @@ public class IndexController {
         }
         return "user/information";
     }
-    @RequestMapping("/seekercompany")
+    @RequestMapping("/seeker/company")
     public String seekercompany(Model model)
     {
         List<Company> companyList = companyService.queryAllCompany();

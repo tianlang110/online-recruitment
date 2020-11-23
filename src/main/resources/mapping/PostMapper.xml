@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longlong.mapper.PostMapper">
+
+    <resultMap id="BaseResultMap" type="com.longlong.entity.Post">
+        <result column="companyid" jdbcType="INTEGER" property="companyid" />
+        <result column="postid" jdbcType="INTEGER" property="postid" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="salary" jdbcType="VARCHAR" property="salary" />
+        <result column="requirement" jdbcType="VARCHAR" property="requirement" />
+        <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    </resultMap>
+
+    <select id="queryPostByName" resultType="com.longlong.entity.Post">
+        select * from post where name = #{name}
+    </select>
+
+    <select id="queryPostById" resultType="com.longlong.entity.Post">
+        select * from post where postid = #{postid}
+    </select>
+
+    <select id="queryPostByNameAndCompanyId" resultType="com.longlong.entity.Post">
+        select * from post where name = #{name} and companyid = #{companyid}
+    </select>
+
+    <select id="queryAllPost" resultType="com.longlong.entity.Post">
+        select * from post
+    </select>
+
+    <select id="queryAllCompanyPost" resultType="com.longlong.entity.Post">
+        select * from post where companyid = #{companyid}
+    </select>
+
+    <insert id="addPost" parameterType="com.longlong.entity.Post">
+        insert into post(companyid, name, type, salary, requirement, introduction) VALUES (#{companyid},#{name},#{type},#{salary},#{requirement},#{introduction})
+    </insert>
+
+    <update id="updatePost" parameterType="com.longlong.entity.Post">
+        update post set name=#{name},type=#{type},salary=#{salary},requirement=#{requirement},introduction=#{introduction} where postid=#{postid}
+    </update>
+
+    <delete id="deletePost" parameterType="com.longlong.entity.Post">
+        delete from post where postid = #{postid}
+    </delete>
+</mapper>

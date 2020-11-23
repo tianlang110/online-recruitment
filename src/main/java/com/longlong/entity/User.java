@@ -64,11 +64,11 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> auths = new ArrayList<>();
         if(this.getUsertype() == 0)
-            auths.add(new SimpleGrantedAuthority("admin"));
+            auths.add(new SimpleGrantedAuthority("ROLE_admin"));
         else if(this.getUsertype() == 1)
-            auths.add(new SimpleGrantedAuthority("seeker"));
+            auths.add(new SimpleGrantedAuthority("ROLE_seeker"));
         else
-            auths.add(new SimpleGrantedAuthority("company"));
+            auths.add(new SimpleGrantedAuthority("ROLE_company"));
 
         return auths;
     }

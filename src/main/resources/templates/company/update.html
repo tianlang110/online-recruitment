@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <meta charset="utf-8">
+  <title>职位修改</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="比奇堡招聘网">
+  <meta name="description" content="我们要成为全球最大的招聘网站">
+  <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+  <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+
+<div th:insert="~{index::topbar}"></div>
+<div th:insert="~{company/index::company-topbar}"></div>
+
+<div class="layui-container fly-marginTop">
+  <div class="fly-panel fly-panel-user" pad20>
+    <div class="layui-tab layui-tab-brief" lay-filter="user">
+      <ul class="layui-tab-title">
+        <li class="layui-this">职位修改</li>
+      </ul>
+      <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+        <div class="layui-tab-item layui-show">
+          <div class="layui-form layui-form-pane">
+            <div>
+              <form method="post" th:action="@{/company/doupdate/}+${post.postid}">
+                <div class="layui-form-item">
+                  <label class="layui-form-label">职位名</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="name" autocomplete="off" class="layui-input" th:value="${post.name}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">类型</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="type" autocomplete="off" class="layui-input" th:value="${post.type}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">薪资</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="salary" autocomplete="off" class="layui-input" th:value="${post.salary}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">要求</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="requirement" autocomplete="off" class="layui-input" th:value="${post.requirement}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">简介</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="introduction" autocomplete="off" class="layui-input" th:value="${post.introduction}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <button class="layui-btn" lay-filter="formDemo" lay-submit>提交</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div th:insert="~{index::bootombar}"></div>
+
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+  layui.use('form', function(){
+    var form = layui.form;
+  });
+</script>
+
+</body>
+</html>

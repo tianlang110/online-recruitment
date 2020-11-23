@@ -22,13 +22,13 @@
         <a th:href="@{/}"><i class="iconfont icon-jiaoliu"></i>我要求职</a>
       </li>
       <li class="layui-nav-item">
-        <a th:href="@{/}"><i class="iconfont icon-iconmingxinganli"></i>我要招聘</a>
+        <a th:href="@{/company/index}"><i class="iconfont icon-iconmingxinganli"></i>我要招聘</a>
       </li>
       <li class="layui-nav-item">
-        <a th:href="@{/}"><i class="layui-icon layui-icon-group"></i>招聘会信息</a>
+        <a th:href="@{/jobfair}"><i class="layui-icon layui-icon-group"></i>招聘会信息</a>
       </li>
       <li class="layui-nav-item">
-        <a th:href="@{/}"><i class="layui-icon layui-icon-search"></i>兼职信息</a>
+        <a th:href="@{/parttimejob}"><i class="layui-icon layui-icon-search"></i>兼职信息</a>
       </li>
     </ul>
     
@@ -46,6 +46,9 @@
       <!-- 已登入的状态 -->
       <div sec:authorize="isAuthenticated()">
         <li class="layui-nav-item">
+          <span sec:authentication="name"></span>
+        </li>
+        <li class="layui-nav-item">
           <a method="post" th:href="@{/information}">个人信息</a>
         </li>
         <li class="layui-nav-item">
@@ -60,7 +63,7 @@
   <div class="layui-container">
     <ul class="layui-clear">
       <li class="layui-hide-xs layui-this"><a th:href="@{/}">首页</a></li>
-      <li><a th:href="@{/seekercompany}">搜索公司</a></li>
+      <li><a th:href="@{/seeker/company}">搜索公司</a></li>
       <li><a th:href="@{/}">搜索职位</a></li>
       <li><a th:href="@{/}">我的简历</a></li>
       <li><a th:href="@{/}">投递信息</a></li>
