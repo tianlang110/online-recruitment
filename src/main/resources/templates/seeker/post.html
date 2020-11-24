@@ -12,20 +12,15 @@
 </head>
 <body>
 <div th:insert="~{index::topbar}"></div>
-<div th:insert="~{company/index::company-topbar}"></div>
+<div th:insert="~{index::seeker-topbar}"></div>
 
 <div class="layui-container">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="fly-panel">
                 <div class="fly-panel-title fly-filter layui-row layui-col-space10">
-                    <div class="layui-col-md1">
+                    <div class="layui-col-md2">
                         <a>职位列表</a>
-                    </div>
-                    <div class="layui-col-md1">
-                        <form method="post" th:action="@{/company/addpost}">
-                            <button class="layui-btn layui-btn-xs" lay-submit><i class="layui-icon layui-icon-addition"></i></button>
-                        </form>
                     </div>
                     <div class="layui-col-md10">
                     <form class="fly-right" method="post" th:action="@{/company/query}">
@@ -55,8 +50,8 @@
                         <td th:text="${post.type}"></td>
                         <td th:text="${post.introduction}"></td>
                         <td class="layui-row layui-col-space10">
-                            <a type="button" class="layui-btn layui-btn-xs" th:href="@{/company/update/}+${post.postid}">修改</a>
-                            <a type="button" class="layui-btn layui-btn-xs" th:href="@{/company/delete/}+${post.postid}">删除</a>
+                            <a type="button" class="layui-btn layui-btn-xs" th:href="@{/seeker/details/}+${post.postid}">详情</a>
+                            <a type="button" class="layui-btn layui-btn-xs" th:href="@{/seeker/candidate/}+${post.postid}">投递</a>
                         </td>
                     </tr>
                     </tbody>

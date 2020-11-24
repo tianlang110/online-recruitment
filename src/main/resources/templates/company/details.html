@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <meta charset="utf-8">
+  <title>人才详情</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="比奇堡招聘网">
+  <meta name="description" content="我们要成为全球最大的招聘网站">
+  <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+  <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+
+<div th:insert="~{index::topbar}"></div>
+<div th:insert="~{company/index::company-topbar}"></div>
+
+<div class="layui-container fly-marginTop">
+  <div class="fly-panel fly-panel-user" pad20>
+    <div class="layui-tab layui-tab-brief" lay-filter="user">
+      <ul class="layui-tab-title">
+        <li class="layui-this">人才详情</li>
+      </ul>
+      <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+        <div class="layui-tab-item layui-show">
+          <div class="layui-form layui-form-pane">
+            <div>
+              <form method="post" th:action="@{/}">
+                <div class="layui-form-item">
+                  <label class="layui-form-label">姓名</label>
+                  <div class="layui-input-inline">
+                    <input readonly="readonly" type="text" name="name" autocomplete="off" class="layui-input" th:value="${seeker.name}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">性别</label>
+                  <div class="layui-input-inline" >
+                    <input readonly="readonly" type="text" name="name" autocomplete="off" class="layui-input" th:value="${seeker.sex}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">年龄</label>
+                  <div class="layui-input-inline">
+                    <input readonly="readonly" type="text" name="age" autocomplete="off" class="layui-input" th:value="${seeker.age}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">电话</label>
+                  <div class="layui-input-inline">
+                    <input readonly="readonly" type="text" name="phone" autocomplete="off" class="layui-input" th:value="${seeker.phone}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">邮箱</label>
+                  <div class="layui-input-inline">
+                    <input readonly="readonly" type="text" name="email" autocomplete="off" class="layui-input" th:value="${seeker.email}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">学历</label>
+                  <div class="layui-input-inline">
+                    <input readonly="readonly" type="text" name="education" autocomplete="off" class="layui-input" th:value="${seeker.education}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">期望职位</label>
+                  <div class="layui-input-inline">
+                    <input readonly="readonly" type="text" name="post" autocomplete="off" class="layui-input" th:value="${seeker.post}">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">期望薪资</label>
+                  <div class="layui-input-inline">
+                    <input readonly="readonly" type="text" name="salary" autocomplete="off" class="layui-input" th:value="${seeker.salary}">
+                  </div>
+                </div>
+              </form>
+              <form method="post" th:action="@{/company/recruit/}+${seeker.userid}">
+                <button class="layui-btn" lay-submit>招聘</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div th:insert="~{index::bootombar}"></div>
+
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+  layui.use('form', function(){
+    var form = layui.form;
+  });
+</script>
+
+</body>
+</html>

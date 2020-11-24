@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longlong.mapper.CandidateMapper">
+
+    <resultMap id="BaseResultMap" type="com.longlong.entity.Candidate">
+        <result column="seekerid" jdbcType="INTEGER" property="seekerid" />
+        <result column="postid" jdbcType="INTEGER" property="postid" />
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="time" jdbcType="DATE" property="time" />
+        <result column="state" jdbcType="VARCHAR" property="state" />
+    </resultMap>
+
+    <select id="queryCandidateBySeekerid" resultType="com.longlong.entity.Candidate">
+        select * from candidate where seekerid = #{seekerid}
+    </select>
+
+    <select id="queryCandidateByPostid" resultType="com.longlong.entity.Candidate">
+        select * from candidate where postid = #{postid}
+    </select>
+
+    <select id="queryCandidateByCompanyid" resultType="com.longlong.entity.Candidate">
+        select * from candidate,post where companyid = #{companyid} and candidate.postid=post.postid
+    </select>
+
+    <select id="queryAllCandidate" resultType="com.longlong.entity.Candidate">
+        select * from candidate
+    </select>
+
+    <insert id="addCandidate" parameterType="Candidate">
+        insert into candidate(seekerid, postid, "time", state) values (#{seekerid},#{postid},#{time},#{state})
+    </insert>
+
+    <update id="updateCandidate" parameterType="Candidate">
+        update candidate set seekerid=#{seekerid},postid=#{postid},time=#{time},state=#{state} where id=#{id}
+    </update>
+
+</mapper>

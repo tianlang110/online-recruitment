@@ -5,6 +5,8 @@ import com.longlong.mapper.SeekerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SeekerService {
     @Autowired
@@ -20,5 +22,9 @@ public class SeekerService {
     public int updateSeeker(Seeker seeker)
     {
         return seekerMapper.updateSeeker(seeker);
+    }
+    public List<Seeker> queryAllSeeker()
+    {
+        return seekerMapper.queryAllSeeker();
     }
 }

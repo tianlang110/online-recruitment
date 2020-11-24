@@ -1,8 +1,10 @@
 package com.longlong.controller;
 
 import com.longlong.entity.Post;
+import com.longlong.entity.Seeker;
 import com.longlong.entity.User;
 import com.longlong.service.PostService;
+import com.longlong.service.SeekerService;
 import com.longlong.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,8 @@ public class CompanyController {
     PostService postService;
     @Autowired
     UserService userService;
+    @Autowired
+    SeekerService seekerService;
     @RequestMapping({"/","/index"})
     public String index()
     {
@@ -91,5 +95,35 @@ public class CompanyController {
         post.setIntroduction(introduction);
         postService.updatePost(post);
         return "redirect:/company/post";
+    }
+    @GetMapping("/delete/{postid}")
+    public String delete(@PathVariable("postid") Integer postid)
+    {
+        postService.delete(postid);
+        return "redirect:/company/post";
+    }
+    @RequestMapping("/query")
+    public String query(Principal principal,@RequestParam("name") String name, Model model)
+    {
+        String username = principal.getName();
+        User user = userService.queryUserByUsername(username);
+        List<Post> postList = postService.queryPostByNameAndCompanyId(name,user.getUserid());
+        model.addAttribute("postList",postList);
+        return "company/post";
+    }
+    @RequestMapping("/seeker")
+    public String seeker(Model model){
+        List<Seeker> seekerList =seekerService.queryAllSeeker();
+        model.addAttribute("seekerList",seekerList);
+        return "company/seeker";
+    }
+    @RequestMapping("/details/{userid}")
+    public String details(
+            @PathVariable("userid") int userid,
+            Model model
+    ){
+        Seeker seeker = seekerService.querySeekerByUserid(userid);
+        model.addAttribute("seeker",seeker);
+        return "company/details";
     }
 }

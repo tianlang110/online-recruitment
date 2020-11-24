@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
-    <title>职位列表</title>
+    <title>人才列表</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="比奇堡招聘网">
     <meta name="description" content="我们要成为全球最大的招聘网站">
@@ -19,13 +19,8 @@
         <div class="layui-col-md12">
             <div class="fly-panel">
                 <div class="fly-panel-title fly-filter layui-row layui-col-space10">
-                    <div class="layui-col-md1">
-                        <a>职位列表</a>
-                    </div>
-                    <div class="layui-col-md1">
-                        <form method="post" th:action="@{/company/addpost}">
-                            <button class="layui-btn layui-btn-xs" lay-submit><i class="layui-icon layui-icon-addition"></i></button>
-                        </form>
+                    <div class="layui-col-md2">
+                        <a>人才列表</a>
                     </div>
                     <div class="layui-col-md10">
                     <form class="fly-right" method="post" th:action="@{/company/query}">
@@ -43,20 +38,20 @@
                     </colgroup>
                     <thead>
                     <tr>
-                        <th>职位名称</th>
-                        <th>职位类型</th>
-                        <th>简介</th>
+                        <th>姓名</th>
+                        <th>学历</th>
+                        <th>目标岗位</th>
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="post:${postList}">
-                        <td th:text="${post.name}"></td>
-                        <td th:text="${post.type}"></td>
-                        <td th:text="${post.introduction}"></td>
+                    <tr th:each="seeker:${seekerList}">
+                        <td th:text="${seeker.name}"></td>
+                        <td th:text="${seeker.education}"></td>
+                        <td th:text="${seeker.post}"></td>
                         <td class="layui-row layui-col-space10">
-                            <a type="button" class="layui-btn layui-btn-xs" th:href="@{/company/update/}+${post.postid}">修改</a>
-                            <a type="button" class="layui-btn layui-btn-xs" th:href="@{/company/delete/}+${post.postid}">删除</a>
+                            <a type="button" class="layui-btn layui-btn-xs" th:href="@{/company/details/}+${seeker.userid}">详情</a>
+                            <a type="button" class="layui-btn layui-btn-xs" th:href="@{/company/recruit/}+${seeker.userid}">招聘</a>
                         </td>
                     </tr>
                     </tbody>

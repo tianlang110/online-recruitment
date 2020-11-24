@@ -7,6 +7,7 @@ public class Candidate {
     private int postid;
     private int id;
     private Date time;
+    private String state;
 
     @Override
     public String toString() {
@@ -15,7 +16,16 @@ public class Candidate {
                 ", postid=" + postid +
                 ", id=" + id +
                 ", time=" + time +
+                ", state='" + state + '\'' +
                 '}';
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public int getSeekerid() {

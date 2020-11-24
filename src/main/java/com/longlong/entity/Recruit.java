@@ -7,6 +7,7 @@ public class Recruit {
     private int companyid;
     private int seekerid;
     private Date time;
+    private String state;
 
     @Override
     public String toString() {
@@ -15,7 +16,16 @@ public class Recruit {
                 ", companyid=" + companyid +
                 ", seekerid=" + seekerid +
                 ", time=" + time +
+                ", state='" + state + '\'' +
                 '}';
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public int getId() {

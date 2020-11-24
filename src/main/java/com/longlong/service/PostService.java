@@ -27,4 +27,11 @@ public class PostService {
     public int updatePost(Post post){
         return postMapper.updatePost(post);
     }
+    public int delete(int postid){
+        return postMapper.deletePost(postid);
+    }
+    public List<Post> queryPostByNameAndCompanyId(String name,int companyid)
+    {
+        return postMapper.queryPostByNameAndCompanyId(name,companyid);
+    }
 }

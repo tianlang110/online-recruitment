@@ -18,6 +18,11 @@
         select * from seeker where userid = #{userid}
     </select>
 
+
+    <select id="queryAllSeeker" resultType="com.longlong.entity.Seeker">
+        select * from seeker
+    </select>
+
     <insert id="addSeeker" parameterType="Seeker">
         insert into seeker(userid, name, sex, age, phone, email, education, post, salary) values (#{userid},#{name},#{sex},#{age},#{phone},#{email},#{education},#{post},#{salary})
     </insert>
