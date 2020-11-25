@@ -11,6 +11,10 @@ import java.util.List;
 public class CandidateService {
     @Autowired
     CandidateMapper candidateMapper;
+
+    public Candidate queryCandidateById(int id){
+        return candidateMapper.queryCandidateById(id);
+    }
     public List<Candidate> queryCandidateBySeekerid(int seekerid){
         return candidateMapper.queryCandidateBySeekerid(seekerid);
     }

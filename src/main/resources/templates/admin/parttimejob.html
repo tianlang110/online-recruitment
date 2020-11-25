@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
-    <title>人才列表</title>
+    <title>兼职列表</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="比奇堡招聘网">
     <meta name="description" content="我们要成为全球最大的招聘网站">
@@ -12,7 +12,7 @@
 </head>
 <body>
 <div th:insert="~{index::topbar}"></div>
-<div th:insert="~{company/index::company-topbar}"></div>
+<div th:insert="~{admin/index::admin-topbar}"></div>
 
 <div class="layui-container">
     <div class="layui-row layui-col-space15">
@@ -20,35 +20,39 @@
             <div class="fly-panel">
                 <div class="fly-panel-title fly-filter layui-row layui-col-space10">
                     <div class="layui-col-md2">
-                        <a>人才列表</a>
+                        <a>兼职列表</a>
                     </div>
-                    <div class="layui-col-md10">
+                    <div class="layui-col-md1">
+                        <form method="post" th:action="@{/admin/parttimejobadd}">
+                            <button class="layui-btn layui-btn-xs" lay-submit><i class="layui-icon layui-icon-addition"></i></button>
+                        </form>
                     </div>
                 </div>
                 <table class="layui-table" lay-skin="line">
                     <colgroup>
                         <col width="150">
                         <col width="150">
-                        <col width="600">
+                        <col width="150">
+                        <col width="550">
                         <col>
                     </colgroup>
                     <thead>
                     <tr>
-                        <th>姓名</th>
-                        <th>学历</th>
-                        <th>目标岗位</th>
+                        <th>兼职名称</th>
+                        <th>兼职地点</th>
+                        <th>兼职简介</th>
+                        <th>联系方式</th>
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="seeker:${seekerList}">
-                        <td th:text="${seeker.name}"></td>
-                        <td th:text="${seeker.education}"></td>
-                        <td th:text="${seeker.post}"></td>
+                    <tr th:each="partTimeJob:${partTimeJobList}">
+                        <td th:text="${partTimeJob.name}"></td>
+                        <td th:text="${partTimeJob.address}"></td>
+                        <td th:text="${partTimeJob.introduction}"></td>
+                        <td th:text="${partTimeJob.phone}"></td>
                         <td class="layui-row layui-col-space10">
-                            <a type="button" class="layui-btn layui-btn-xs" th:href="@{/file/download/}+${seeker.userid}">下载简历</a>
-                            <a type="button" class="layui-btn layui-btn-xs" th:href="@{/company/details/}+${seeker.userid}">详情</a>
-                            <a type="button" class="layui-btn layui-btn-xs" th:href="@{/company/recruit/}+${seeker.userid}">招聘</a>
+                            <a type="button" class="layui-btn layui-btn-xs" th:href="@{/admin/deletepartTimeJob/}+${partTimeJob.id}">删除</a>
                         </td>
                     </tr>
                     </tbody>

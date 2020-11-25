@@ -12,6 +12,7 @@
         <result column="education" jdbcType="VARCHAR" property="education" />
         <result column="post" jdbcType="VARCHAR" property="post" />
         <result column="salary" jdbcType="VARCHAR" property="salary" />
+        <result column="resume" jdbcType="VARCHAR" property="resume" />
     </resultMap>
 
     <select id="querySeekerByUserid" resultType="com.longlong.entity.Seeker">
@@ -24,10 +25,10 @@
     </select>
 
     <insert id="addSeeker" parameterType="Seeker">
-        insert into seeker(userid, name, sex, age, phone, email, education, post, salary) values (#{userid},#{name},#{sex},#{age},#{phone},#{email},#{education},#{post},#{salary})
+        insert into seeker(userid, name, sex, age, phone, email, education, post, salary,resume) values (#{userid},#{name},#{sex},#{age},#{phone},#{email},#{education},#{post},#{salary},#{resume})
     </insert>
 
     <update id="updateSeeker" parameterType="Seeker">
-        update seeker set name=#{name},sex=#{sex},age=#{age},phone=#{phone},email=#{email},education=#{education},post=#{post},salary=#{salary} where userid=#{userid}
+        update seeker set name=#{name},sex=#{sex},age=#{age},phone=#{phone},email=#{email},education=#{education},post=#{post},salary=#{salary},resume=#{resume} where userid=#{userid}
     </update>
 </mapper>

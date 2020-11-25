@@ -89,6 +89,9 @@
                   </div>
                 </div>
                 <div class="layui-form-item">
+                  <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传简历</button>
+                </div>
+                <div class="layui-form-item">
                   <button class="layui-btn" lay-filter="formDemo" lay-submit>提交</button>
                 </div>
               </form>
@@ -134,6 +137,22 @@
   layui.use('form', function(){
     var form = layui.form;
   });
+  layui.use('upload',function () {
+    var $ = layui.jquery
+    ,upload = layui.upload;
+    upload.render({
+      elem:'#test3'
+      ,url:'/file/upload'
+      ,accept:'file'
+      ,exts:'pdf|docx'
+      ,done:function (res) {
+        layer.msg('上传成功');
+      }
+      ,error:function (res) {
+        layer.msg('上传失败');
+      }
+    });
+  })
 </script>
 
 </body>

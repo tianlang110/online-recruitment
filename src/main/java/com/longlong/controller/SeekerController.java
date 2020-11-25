@@ -1,9 +1,6 @@
 package com.longlong.controller;
 
-import com.longlong.entity.Candidate;
-import com.longlong.entity.Company;
-import com.longlong.entity.Post;
-import com.longlong.entity.User;
+import com.longlong.entity.*;
 import com.longlong.service.CandidateService;
 import com.longlong.service.CompanyService;
 import com.longlong.service.PostService;
@@ -14,8 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import sun.swing.BakedArrayList;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -57,16 +56,24 @@ public class SeekerController {
         model.addAttribute("company",company);
         return "seeker/postdetails";
     }
-    @RequestMapping("/seeker/allcandidate")
+    @RequestMapping("/allcandidate")
     public String allcandidate(Principal principal,Model model){
         String username = principal.getName();
         User user = userService.queryUserByUsername(username);
         List<Candidate> candidateList = candidateService.queryCandidateBySeekerid(user.getUserid());
-        
+        List<BigCandidate> bigCandidateList = new ArrayList<>();
         for(int i=0;i<candidateList.size();i++)
         {
-
+            List<Post> postList =  postService.queryPostById(candidateList.get(i).getPostid());
+            Post post = postList.get(0);
+            BigCandidate bigCandidate = new BigCandidate();
+            bigCandidate.setPostname(post.getName());
+            bigCandidate.setPosttype(post.getType());
+            bigCandidate.setTime(candidateList.get(i).getTime().toString());
+            bigCandidate.setType(candidateList.get(i).getState());
+            bigCandidateList.add(bigCandidate);
         }
+        model.addAttribute("candidateList",bigCandidateList);
         return "seeker/candidate";
     }
     @RequestMapping("/candidate/{postid}")

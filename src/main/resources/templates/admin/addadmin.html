@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <meta charset="utf-8">
+  <title>添加管理员</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="比奇堡招聘网">
+  <meta name="description" content="我们要成为全球最大的招聘网站">
+  <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+  <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+
+<div th:insert="~{index::topbar}"></div>
+<div th:insert="~{admin/index::admin-topbar}"></div>
+
+<div class="layui-container fly-marginTop">
+  <div class="fly-panel fly-panel-user" pad20>
+    <div class="layui-tab layui-tab-brief" lay-filter="user">
+      <ul class="layui-tab-title">
+        <li class="layui-this">添加管理员</li>
+      </ul>
+      <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+        <div class="layui-tab-item layui-show">
+          <div class="layui-form layui-form-pane">
+            <form method="post" th:action="@{/admin/addadmin}">
+              <div class="layui-form-item">
+                <label for="L_username" class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                  <input type="text" id="L_username" name="username" required lay-verify="username|checkusername" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid" style="color: red" th:if="${param.error}">用户名重复</div>
+              </div>
+              <div class="layui-form-item">
+                <label for="L_pass" class="layui-form-label">密码</label>
+                <div class="layui-input-inline">
+                  <input type="password" id="L_pass" name="password" required lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label">确认密码</label>
+                <div class="layui-input-inline">
+                  <input type="password" id="L_repass" name="repassword" required lay-verify="required|confirmPass" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label">姓名</label>
+                <div class="layui-input-inline">
+                  <input type="text" name="name" required autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <button class="layui-btn" lay-filter="formDemo" lay-submit>添加</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div th:insert="~{index::bootombar}"></div>
+
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+layui.use('form', function(){
+  var form = layui.form;
+  form.verify({
+    username: function(value, item){ //value：表单的值、item：表单的DOM对象
+      if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
+        return '用户名不能有特殊字符';
+      }
+      if(/(^\_)|(\__)|(\_+$)/.test(value)){
+        return '用户名首尾不能出现下划线\'_\'';
+      }
+      if(/^\d+\d+\d$/.test(value)){
+        return '用户名不能全为数字';
+      }
+    }
+    ,password: [
+      /^[\S]{6,12}$/
+      ,'密码必须6到12位，且不能出现空格'
+    ]
+    ,confirmPass: function (value) {
+      if (layui.$('input[name=password]').val() != value)
+        return '两次密码输入不一致！';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longlong.mapper.JobFairMapper">
+
+    <resultMap id="BaseResultMap" type="com.longlong.entity.JobFair">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="time" jdbcType="DATE" property="time" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    </resultMap>
+
+    <select id="queryJobFairById" resultType="com.longlong.entity.JobFair">
+        select * from jobfair where id = #{id}
+    </select>
+
+    <select id="queryJobFairByName" resultType="com.longlong.entity.JobFair">
+        select * from jobfair where name = #{name}
+    </select>
+
+    <select id="queryAllJobFair" resultType="com.longlong.entity.JobFair">
+        select * from jobfair
+    </select>
+
+    <insert id="addJobFair" parameterType="com.longlong.entity.JobFair">
+        insert into jobfair(id, name, time, address, introduction) values (#{id}, #{name}, #{time}, #{address}, #{introduction})
+    </insert>
+
+    <update id="updateJobFair" parameterType="com.longlong.entity.JobFair">
+        update jobfair set name=#{name},time=#{time},address=#{address},introduction=#{introduction} where id=#{id}
+    </update>
+
+    <delete id="deletejobfair" parameterType="com.longlong.entity.JobFair">
+        delete from jobfair where id = #{id}
+    </delete>
+
+</mapper>

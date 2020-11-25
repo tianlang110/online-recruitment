@@ -10,6 +10,10 @@
         <result column="state" jdbcType="VARCHAR" property="state" />
     </resultMap>
 
+    <select id="queryCandidateById" resultType="com.longlong.entity.Candidate">
+        select * from candidate where id = #{id}
+    </select>
+
     <select id="queryCandidateBySeekerid" resultType="com.longlong.entity.Candidate">
         select * from candidate where seekerid = #{seekerid}
     </select>
@@ -27,7 +31,7 @@
     </select>
 
     <insert id="addCandidate" parameterType="Candidate">
-        insert into candidate(seekerid, postid, "time", state) values (#{seekerid},#{postid},#{time},#{state})
+        insert into candidate(seekerid, postid, time, state) values (#{seekerid},#{postid},#{time},#{state})
     </insert>
 
     <update id="updateCandidate" parameterType="Candidate">

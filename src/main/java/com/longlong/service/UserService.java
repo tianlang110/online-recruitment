@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService implements UserDetailsService {
 
@@ -24,5 +26,12 @@ public class UserService implements UserDetailsService {
         User user = userMapper.queryUserByUsername(username);
         //System.out.println(user.getUsername());
         return user;
+    }
+
+    public List<User> queryAllUser(){
+        return userMapper.queryAllUser();
+    }
+    public int deleteUser(int userid){
+        return userMapper.deleteUser(userid);
     }
 }

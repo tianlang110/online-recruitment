@@ -1,11 +1,11 @@
 package com.longlong.controller;
 
-import com.longlong.entity.Post;
-import com.longlong.entity.Seeker;
-import com.longlong.entity.User;
+import com.longlong.entity.*;
+import com.longlong.service.CandidateService;
 import com.longlong.service.PostService;
 import com.longlong.service.SeekerService;
 import com.longlong.service.UserService;
+import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -27,6 +30,8 @@ public class CompanyController {
     UserService userService;
     @Autowired
     SeekerService seekerService;
+    @Autowired
+    CandidateService candidateService;
     @RequestMapping({"/","/index"})
     public String index()
     {
@@ -125,5 +130,48 @@ public class CompanyController {
         Seeker seeker = seekerService.querySeekerByUserid(userid);
         model.addAttribute("seeker",seeker);
         return "company/details";
+    }
+    @RequestMapping("/candidate")
+    public String candidate(Principal principal,Model model){
+        String username = principal.getName();
+        User user = userService.queryUserByUsername(username);
+        List<Candidate> candidateList = candidateService.queryCandidateByCompanyid(user.getUserid());
+        List<BigCandidate> bigCandidateList = new ArrayList<>();
+        for(int i=0;i<candidateList.size();i++)
+        {
+            Candidate candidate = candidateList.get(i);
+            BigCandidate bigCandidate = new BigCandidate();
+            Seeker seeker = seekerService.querySeekerByUserid(candidate.getSeekerid());
+            Post post = postService.queryPostById(candidate.getPostid()).get(0);
+            bigCandidate.setPostname(post.getName());
+            bigCandidate.setSeekername(seeker.getName());
+            bigCandidate.setType(candidate.getState());
+            SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd" );
+            String str = sdf.format(candidate.getTime());
+            bigCandidate.setTime(str);
+            bigCandidate.setId(candidate.getId());
+            bigCandidate.setSeekerid(candidate.getSeekerid());
+            bigCandidateList.add(bigCandidate);
+        }
+        model.addAttribute("candidateList",bigCandidateList);
+        return "company/candidate";
+    }
+    @RequestMapping("/agree/{id}")
+    public String agree(
+            @PathVariable("id") int id
+    ){
+        Candidate candidate = candidateService.queryCandidateById(id);
+        candidate.setState("已同意");
+        candidateService.updateCandidate(candidate);
+        return "redirect:/company/candidate";
+    }
+    @RequestMapping("/refuse/{id}")
+    public String refuse(
+            @PathVariable("id") int id
+    ){
+        Candidate candidate = candidateService.queryCandidateById(id);
+        candidate.setState("已拒绝");
+        candidateService.updateCandidate(candidate);
+        return "redirect:/company/candidate";
     }
 }

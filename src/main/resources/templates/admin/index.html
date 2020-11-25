@@ -12,14 +12,14 @@
 </head>
 <body>
 <div th:insert="~{index::topbar}"></div>
-<div class="fly-panel fly-column" th:fragment="company-topbar">
+<div class="fly-panel fly-column" th:fragment="admin-topbar">
     <div class="layui-container">
         <ul class="layui-clear">
             <li class="layui-hide-xs layui-this"><a th:href="@{/company/index}">首页</a></li>
-            <li><a th:href="@{/company/post}">职位管理</a></li>
-            <li><a th:href="@{/company/seeker}">人才搜索</a></li>
-            <li><a th:href="@{/}">招聘信息</a></li>
-            <li><a th:href="@{/company/candidate}">投递情况</a></li>
+            <li><a th:href="@{/admin/user}">用户管理</a></li>
+            <li><a th:href="@{/admin/jobfair}">招聘会管理</a></li>
+            <li><a th:href="@{/admin/parttimejob}">兼职信息管理</a></li>
+            <li><a th:href="@{/admin/admin}">添加管理员</a></li>
         </ul>
     </div>
 </div>

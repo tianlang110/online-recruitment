@@ -7,28 +7,28 @@
         <result column="name" jdbcType="VARCHAR" property="name" />
     </resultMap>
 
-    <select id="queryCandidateBySeekerid" resultType="com.longlong.entity.Admin">
-        select * from candidate where seekerid = #{seekerid}
+    <select id="queryAdminByUserid" resultType="com.longlong.entity.Admin">
+        select * from candidate where userid = #{userid}
     </select>
 
-    <select id="queryCandidateByPostid" resultType="com.longlong.entity.Candidate">
-        select * from candidate where postid = #{postid}
+    <select id="queryAdminByName" resultType="com.longlong.entity.Admin">
+        select * from candidate where name = #{name}
     </select>
 
-    <select id="queryCandidateByCompanyid" resultType="com.longlong.entity.Candidate">
-        select * from candidate,post where companyid = #{companyid} and candidate.postid=post.postid
+    <select id="queryAllAdmin" resultType="com.longlong.entity.Admin">
+        select * from admin
     </select>
 
-    <select id="queryAllCandidate" resultType="com.longlong.entity.Candidate">
-        select * from candidate
-    </select>
-
-    <insert id="addCandidate" parameterType="Candidate">
-        insert into candidate(seekerid, postid, "time", state) values (#{seekerid},#{postid},#{time},#{state})
+    <insert id="addAdmin" parameterType="Admin">
+        insert into admin(userid, name) values (#{userid},#{name})
     </insert>
 
-    <update id="updateCandidate" parameterType="Candidate">
-        update candidate set seekerid=#{seekerid},postid=#{postid},time=#{time},state=#{state} where id=#{id}
+    <update id="updateAdmin" parameterType="Admin">
+        update candidate set name=#{name} where userid=#{userid}
     </update>
+
+    <delete id="deleteadmin" parameterType="Admin">
+        delete from admin where userid = #{userid}
+    </delete>
 
 </mapper>

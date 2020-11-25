@@ -40,10 +40,10 @@
                     </thead>
                     <tbody>
                     <tr th:each="candidate:${candidateList}">
-                        <td th:text="${}"></td>
-                        <td th:text="${}"></td>
-                        <td th:text="${}"></td>
-                        <td th:text="${}"></td>
+                        <td th:text="${candidate.postname}"></td>
+                        <td th:text="${candidate.posttype}"></td>
+                        <td th:text="${candidate.time}"></td>
+                        <td th:text="${candidate.type}"></td>
                     </tr>
                     </tbody>
                 </table>

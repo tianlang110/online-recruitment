@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longlong.mapper.PartTimeJobMapper">
+
+    <resultMap id="BaseResultMap" type="com.longlong.entity.PartTimeJob">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    </resultMap>
+
+    <select id="queryPartTimeJobById" resultType="com.longlong.entity.PartTimeJob">
+        select * from parttimejob where id = #{id}
+    </select>
+
+    <select id="queryPartTimeJobByName" resultType="com.longlong.entity.PartTimeJob">
+        select * from parttimejob where name = #{name}
+    </select>
+
+    <select id="queryAllPartTimeJob" resultType="com.longlong.entity.PartTimeJob">
+        select * from parttimejob
+    </select>
+
+    <insert id="addPartTimeJob" parameterType="com.longlong.entity.PartTimeJob">
+        insert into parttimejob(id, name, phone, address, introduction) values (#{id},#{name},#{phone},#{address},#{introduction})
+    </insert>
+
+    <update id="updatePartTimeJob" parameterType="com.longlong.entity.PartTimeJob">
+        update parttimejob set name=#{name},phone=#{phone},address=#{address},introduction=#{introduction} where id=#{id}
+    </update>
+
+    <delete id="deletePartTimeJob" parameterType="com.longlong.entity.PartTimeJob">
+        delete from parttimejob where id = #{id}
+    </delete>
+
+</mapper>
