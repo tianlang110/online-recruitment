@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>招聘会列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="比奇堡招聘网">
+    <meta name="description" content="我们要成为全球最大的招聘网站">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<div th:insert="~{index::topbar}"></div>
+
+<div class="layui-container">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="fly-panel">
+                <div class="fly-panel-title fly-filter layui-row layui-col-space10">
+                    <div class="layui-col-md2">
+                        <a>招聘会列表</a>
+                    </div>
+                    <div class="layui-col-md10">
+                    <form class="fly-right" method="post" th:action="@{/queryjobfair}">
+                        <input type="text" name="name" class="layui-input-inline">
+                        <button class="layui-btn layui-btn-xs" lay-submit><i class="layui-icon layui-icon-search"></i></button>
+                    </form>
+                    </div>
+                </div>
+                <table class="layui-table" lay-skin="line">
+                    <colgroup>
+                        <col width="150">
+                        <col width="150">
+                        <col width="700">
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>招聘会名称</th>
+                        <th>地点</th>
+                        <th>简介</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="jobfair:${jobFairList}">
+                        <td th:text="${jobfair.name}"></td>
+                        <td th:text="${jobfair.address}"></td>
+                        <td th:text="${jobfair.introduction}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div th:insert="~{index::bootombar}"></div>
+
+</body>
+</html>

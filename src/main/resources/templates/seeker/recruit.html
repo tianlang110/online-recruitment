@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>招聘列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="比奇堡招聘网">
+    <meta name="description" content="我们要成为全球最大的招聘网站">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+</head>
+<body>
+<div th:insert="~{index::topbar}"></div>
+<div th:insert="~{index::seeker-topbar}"></div>
+
+<div class="layui-container">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="fly-panel">
+                <div class="fly-panel-title fly-filter layui-row layui-col-space10">
+                    <div class="layui-col-md12">
+                        <a>招聘列表</a>
+                    </div>
+                </div>
+                <table class="layui-table" lay-skin="line">
+                    <colgroup>
+                        <col width="150">
+                        <col width="150">
+                        <col width="700">
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>公司名</th>
+                        <th>状态</th>
+                        <th>招聘时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="recruit:${recruitList}">
+                        <td th:text="${recruit.companyname}"></td>
+                        <td th:text="${recruit.type}"></td>
+                        <td th:text="${recruit.time}"></td>
+                        <td class="layui-row layui-col-space10">
+                            <a type="button" class="layui-btn layui-btn-xs" th:href="@{/seeker/agree/}+${recruit.id}">同意</a>
+                            <a type="button" class="layui-btn layui-btn-xs" th:href="@{/seeker/refuse/}+${recruit.id}">拒绝</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div th:insert="~{index::bootombar}"></div>
+
+</body>
+</html>

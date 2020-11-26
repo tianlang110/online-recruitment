@@ -1,10 +1,7 @@
 package com.longlong.controller;
 
 import com.longlong.entity.*;
-import com.longlong.service.CandidateService;
-import com.longlong.service.CompanyService;
-import com.longlong.service.PostService;
-import com.longlong.service.UserService;
+import com.longlong.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sun.swing.BakedArrayList;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +32,10 @@ public class SeekerController {
     CandidateService candidateService;
     @Autowired
     UserService userService;
+    @Autowired
+    RecruitService recruitService;
+    @Autowired
+    SeekerService seekerService;
     @RequestMapping("/querycompany")
     public String querycompany(@RequestParam("name") String name , Model model)
     {
@@ -69,7 +71,9 @@ public class SeekerController {
             BigCandidate bigCandidate = new BigCandidate();
             bigCandidate.setPostname(post.getName());
             bigCandidate.setPosttype(post.getType());
-            bigCandidate.setTime(candidateList.get(i).getTime().toString());
+            SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd" );
+            String str = sdf.format(candidateList.get(i).getTime());
+            bigCandidate.setTime(str);
             bigCandidate.setType(candidateList.get(i).getState());
             bigCandidateList.add(bigCandidate);
         }
@@ -87,5 +91,47 @@ public class SeekerController {
         candidate.setState("已投递");
         candidateService.addCandidate(candidate);
         return "redirect:/seeker/allcandidate";
+    }
+    @RequestMapping("/recruit")
+    public String allrecruit(
+            Principal principal,Model model
+    ){
+        String username = principal.getName();
+        User user = userService.queryUserByUsername(username);
+        List<Recruit> recruitList = recruitService.queryRecruitBySeekerid(user.getUserid());
+        List<BigRecruit> bigRecruitList = new ArrayList<>();
+        for(int i=0;i<recruitList.size();i++)
+        {
+            Recruit recruit = recruitList.get(i);
+            BigRecruit bigRecruit = new BigRecruit();
+            Company company = companyService.queryCompanyByUserid(recruit.getCompanyid());
+            bigRecruit.setCompanyname(company.getName());
+            SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd" );
+            String str = sdf.format(recruit.getTime());
+            bigRecruit.setTime(str);
+            bigRecruit.setType(recruit.getState());
+            bigRecruit.setId(recruit.getId());
+            bigRecruitList.add(bigRecruit);
+        }
+        model.addAttribute("recruitList",bigRecruitList);
+        return "seeker/recruit";
+    }
+    @RequestMapping("/agree/{id}")
+    public String agree(
+            @PathVariable("id") int id
+    ){
+        Recruit recruit = recruitService.queryRecruitById(id).get(0);
+        recruit.setState("已同意");
+        recruitService.updateRecruit(recruit);
+        return "redirect:/seeker/recruit";
+    }
+    @RequestMapping("/refuse/{id}")
+    public String refuse(
+            @PathVariable("id") int id
+    ){
+        Recruit recruit = recruitService.queryRecruitById(id).get(0);
+        recruit.setState("已拒绝");
+        recruitService.updateRecruit(recruit);
+        return "redirect:/seeker/recruit";
     }
 }

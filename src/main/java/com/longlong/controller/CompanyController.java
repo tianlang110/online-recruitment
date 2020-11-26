@@ -1,10 +1,7 @@
 package com.longlong.controller;
 
 import com.longlong.entity.*;
-import com.longlong.service.CandidateService;
-import com.longlong.service.PostService;
-import com.longlong.service.SeekerService;
-import com.longlong.service.UserService;
+import com.longlong.service.*;
 import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +29,8 @@ public class CompanyController {
     SeekerService seekerService;
     @Autowired
     CandidateService candidateService;
+    @Autowired
+    RecruitService recruitService;
     @RequestMapping({"/","/index"})
     public String index()
     {
@@ -173,5 +172,44 @@ public class CompanyController {
         candidate.setState("已拒绝");
         candidateService.updateCandidate(candidate);
         return "redirect:/company/candidate";
+    }
+    @RequestMapping("/recruit")
+    public String allrecruit(
+            Principal principal,Model model
+    ){
+        String username = principal.getName();
+        User user = userService.queryUserByUsername(username);
+        List<Recruit> recruitList = recruitService.queryRecruitByCompanyid(user.getUserid());
+        List<BigRecruit> bigRecruitList = new ArrayList<>();
+        for(int i=0;i<recruitList.size();i++)
+        {
+            Recruit recruit = recruitList.get(i);
+            BigRecruit bigRecruit = new BigRecruit();
+            Seeker seeker = seekerService.querySeekerByUserid(recruit.getSeekerid());
+            bigRecruit.setSeekername(seeker.getName());
+            SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd" );
+            String str = sdf.format(recruit.getTime());
+            bigRecruit.setTime(str);
+            bigRecruit.setType(recruit.getState());
+            bigRecruitList.add(bigRecruit);
+        }
+        model.addAttribute("recruitList",bigRecruitList);
+        return "company/recruit";
+    }
+    @RequestMapping("/recruit/{seekerid}")
+    public String recruit(
+            @PathVariable("seekerid") int seekerid,
+            Principal principal
+    )
+    {
+        String username = principal.getName();
+        User user = userService.queryUserByUsername(username);
+        Recruit recruit = new Recruit();
+        recruit.setCompanyid(user.getUserid());
+        recruit.setSeekerid(seekerid);
+        recruit.setState("待回复");
+        recruit.setTime(new Date());
+        recruitService.addRecruit(recruit);
+        return "redirect:/company/recruit";
     }
 }

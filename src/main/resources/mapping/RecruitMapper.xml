@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longlong.mapper.RecruitMapper">
+
+    <resultMap id="BaseResultMap" type="com.longlong.entity.Recruit">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="companyid" jdbcType="INTEGER" property="companyid" />
+        <result column="seekerid" jdbcType="INTEGER" property="seekerid" />
+        <result column="time" jdbcType="DATE" property="time" />
+        <result column="state" jdbcType="VARCHAR" property="state" />
+    </resultMap>
+
+    <select id="queryRecruitById" resultType="com.longlong.entity.Recruit">
+        select * from recruit where id = #{id}
+    </select>
+
+    <select id="queryRecruitByCompanyid" resultType="com.longlong.entity.Recruit">
+        select * from recruit where companyid = #{companyid}
+    </select>
+
+    <select id="queryRecruitBySeekerid" resultType="com.longlong.entity.Recruit">
+        select * from recruit where seekerid = #{seekerid}
+    </select>
+
+    <select id="queryAllRecruit" resultType="com.longlong.entity.Recruit">
+        select * from recruit
+    </select>
+
+    <insert id="addRecruit" parameterType="com.longlong.entity.Recruit">
+        insert into recruit(id, companyid, seekerid, time, state) values (#{id},#{companyid},#{seekerid},#{time},#{state})
+    </insert>
+
+    <update id="updateRecruit" parameterType="com.longlong.entity.Recruit">
+        update recruit set companyid=#{companyid},seekerid=#{seekerid},time=#{time},state=#{state} where id=#{id}
+    </update>
+
+    <delete id="deleteRecruit" parameterType="com.longlong.entity.Recruit">
+        delete from recruit where id = #{id}
+    </delete>
+
+</mapper>
