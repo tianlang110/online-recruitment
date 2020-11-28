@@ -29,7 +29,7 @@
                     <li th:each="comp:${companys}">
                         <div class="layui-row">
                             <div class="layui-col-md4">
-                                <a th:href="@{/}" style="color: #01AAED;font-weight:bold;font-size: 15px;"><i class="layui-icon layui-icon-home"></i> <div th:text="${comp.name}"></div> </a>
+                                <a th:href="@{/seeker/querypost/}+${comp.userid}" style="color: #01AAED;font-weight:bold;font-size: 15px;"><i class="layui-icon layui-icon-home"></i> <div th:text="${comp.name}"></div> </a>
                             </div>
                             <div class="layui-col-md1 layui-col-md-offset7">
                                 <a th:href="@{/}" style="color: #3F3F3F;font-size: 15px;"><i class="layui-icon layui-icon-location"></i> <div th:text="${comp.address}"></div> </a>

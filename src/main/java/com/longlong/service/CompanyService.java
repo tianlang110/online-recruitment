@@ -31,4 +31,7 @@ public class CompanyService {
     {
         return companyMapper.queryCompanyByName(name);
     }
+    public int deleteCompany(int userid){
+        return companyMapper.deleteCompany(userid);
+    }
 }

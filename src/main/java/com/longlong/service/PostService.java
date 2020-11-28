@@ -34,4 +34,7 @@ public class PostService {
     {
         return postMapper.queryPostByNameAndCompanyId(name,companyid);
     }
+    public int deletePostByCompanyid(int companyid){
+        return postMapper.deletePostByCompanyid(companyid);
+    }
 }

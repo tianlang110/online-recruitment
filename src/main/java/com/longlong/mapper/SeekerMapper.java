@@ -13,5 +13,6 @@ public interface SeekerMapper {
     int addSeeker(Seeker seeker);
     int updateSeeker(Seeker seeker);
     List<Seeker> queryAllSeeker();
+    int deleteSeeker(int userid);
 }
 

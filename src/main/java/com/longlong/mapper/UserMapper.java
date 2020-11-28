@@ -15,4 +15,5 @@ public interface UserMapper {
     int addUser(RegUser user);
     List<User> queryAllUser();
     int deleteUser(int userid);
+    User queryUserByUserid(int userid);
 }

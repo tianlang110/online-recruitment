@@ -43,4 +43,8 @@
     <delete id="deletePost" parameterType="com.longlong.entity.Post">
         delete from post where postid = #{postid}
     </delete>
+
+    <delete id="deletePostByCompanyid" parameterType="com.longlong.entity.Post">
+        delete from post where companyid = #{companyid}
+    </delete>
 </mapper>

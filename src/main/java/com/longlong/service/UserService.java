@@ -34,4 +34,7 @@ public class UserService implements UserDetailsService {
     public int deleteUser(int userid){
         return userMapper.deleteUser(userid);
     }
+    public User queryUserByUserid(int userid){
+        return userMapper.queryUserByUserid(userid);
+    }
 }

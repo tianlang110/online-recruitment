@@ -27,4 +27,7 @@ public class SeekerService {
     {
         return seekerMapper.queryAllSeeker();
     }
+    public int deleteSeeker(int userid){
+        return seekerMapper.deleteSeeker(userid);
+    }
 }

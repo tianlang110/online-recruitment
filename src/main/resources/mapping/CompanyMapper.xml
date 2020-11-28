@@ -29,4 +29,8 @@
         update company set name=#{name},address=#{address},introduction=#{introduction} where userid=#{userid}
     </update>
 
+    <delete id="deleteCompany" parameterType="com.longlong.entity.Company">
+        delete from company where userid=#{userid}
+    </delete>
+
 </mapper>

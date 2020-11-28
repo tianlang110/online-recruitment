@@ -17,4 +17,5 @@ public interface PostMapper {
     int addPost(Post post);
     int updatePost(Post post);
     int deletePost(int postid);
+    int deletePostByCompanyid(int company);
 }

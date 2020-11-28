@@ -49,6 +49,12 @@ public class SeekerController {
         model.addAttribute("postList",postList);
         return "seeker/post";
     }
+    @RequestMapping("/querypost/{companyid}")
+    public String querypost(Model model,@PathVariable("companyid") int companyid){
+        List<Post> postList = postService.queryAllCompanyPost(companyid);
+        model.addAttribute("postList",postList);
+        return "seeker/post";
+    }
     @RequestMapping("/details/{postid}")
     public String details(@PathVariable("postid") int postid,Model model){
         List<Post> postList =postService.queryPostById(postid);

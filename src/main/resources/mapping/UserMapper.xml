@@ -13,6 +13,10 @@
         select * from user where username = #{username}
     </select>
 
+    <select id="queryUserByUserid" resultType="com.longlong.entity.User">
+        select * from user where userid = #{userid}
+    </select>
+
     <select id="queryAllUser" resultType="com.longlong.entity.User">
         select * from user
     </select>

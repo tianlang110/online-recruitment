@@ -19,7 +19,6 @@
         select * from seeker where userid = #{userid}
     </select>
 
-
     <select id="queryAllSeeker" resultType="com.longlong.entity.Seeker">
         select * from seeker
     </select>
@@ -31,4 +30,8 @@
     <update id="updateSeeker" parameterType="Seeker">
         update seeker set name=#{name},sex=#{sex},age=#{age},phone=#{phone},email=#{email},education=#{education},post=#{post},salary=#{salary},resume=#{resume} where userid=#{userid}
     </update>
+
+    <delete id="deleteSeeker" parameterType="Seeker">
+        delete from seeker where userid=#{userid}
+    </delete>
 </mapper>

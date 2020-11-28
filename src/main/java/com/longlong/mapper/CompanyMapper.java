@@ -14,4 +14,5 @@ public interface CompanyMapper {
     List<Company> queryCompanyByName(String name);
     int addCompany(Company company);
     int updateCompany(Company company);
+    int deleteCompany(int userid);
 }

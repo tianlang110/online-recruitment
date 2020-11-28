@@ -2,14 +2,12 @@ package com.longlong.controller;
 import com.longlong.entity.*;
 import com.longlong.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +25,12 @@ public class AdminController {
     JobFairService jobFairService;
     @Autowired
     PartTimeJobService partTimeJobService;
+    @Autowired
+    SeekerService seekerService;
+    @Autowired
+    CompanyService companyService;
+    @Autowired
+    PostService postService;
     @RequestMapping("/index")
     public String index()
     {
@@ -43,6 +47,18 @@ public class AdminController {
     public String delete(
             @PathVariable("userid") int userid
     ){
+        User user = userService.queryUserByUserid(userid);
+        if(user.getUsertype()==0)
+        {
+            adminService.deleteadmin(userid);
+        } else if(user.getUsertype()==1)
+        {
+            seekerService.deleteSeeker(userid);
+        } else
+        {
+            companyService.deleteCompany(userid);
+            postService.deletePostByCompanyid(userid);
+        }
         userService.deleteUser(userid);
         return "redirect:/admin/user";
     }
@@ -138,5 +154,12 @@ public class AdminController {
         partTimeJob.setPhone(phone);
         partTimeJobService.addPartTimeJob(partTimeJob);
         return "redirect:/admin/parttimejob";
+    }
+    @RequestMapping("/deleteparttimejob/{id}")
+    public String deleteparttimejob(
+            @PathVariable("id") int id
+    ){
+        partTimeJobService.deletePartTimeJob(id);
+        return "redirect:/admin/jobfair";
     }
 }
